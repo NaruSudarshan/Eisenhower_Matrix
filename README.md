@@ -13,14 +13,12 @@ The Eisenhower Matrix app helps you organize your tasks by urgency and importanc
 1. **Choose Your Mode:**
    - Use the toggle in the navigation bar to select either:
      - **Local Mode:** No login required. Your tasks are saved only in your browser and are private to your device.
-     - **Cloud Mode:** Log in with Google or another Auth0 provider. Your tasks are securely saved in the cloud and accessible from any device.
+     - **Cloud Mode:** Log in with Google or. Your tasks are securely saved in the cloud and accessible from any device.
 
 2. **Add Tasks:**
-   - Click the "Add Task" button in any quadrant to create a new task.
    - Enter your task details and assign it to the appropriate quadrant based on urgency and importance.
 
 3. **Organize Tasks:**
-   - Drag and drop tasks between quadrants as their priority changes.
    - Use the delete button to remove tasks you've completed or no longer need.
 
 4. **Understand the Quadrants:**
