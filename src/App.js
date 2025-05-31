@@ -79,39 +79,43 @@ function App() {
 
   return (
     <div className="App">
-      <div className="app-header">
-        <h1>Eisenhower Matrix</h1>
-        <button className="dark-toggle" onClick={() => setDarkMode((d) => !d)}>
-          {darkMode ? '🌙 Dark Mode' : '☀️ Light Mode'}
-        </button>
-        <button className="dark-toggle" onClick={handleModeSwitch} style={{ marginLeft: 10 }}>
-          Switch to {mode === 'local' ? 'Cloud (Login)' : 'Local (No Login)'} Mode
-        </button>
-        {mode === 'cloud' && (isLoading ? null : isAuthenticated ? (
-          <>
-            <button className="dark-toggle" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
-              Logout
-            </button>
-            <span style={{ marginLeft: 12, fontWeight: 500, color: '#6366f1' }}>
-              {user.name || user.email}
-            </span>
-          </>
-        ) : (
-          <button className="dark-toggle" onClick={() => loginWithRedirect()}>
-            Login / Signup
+      <nav className="navbar">
+        <div className="navbar-title">Eisenhower Matrix</div>
+        <div className="navbar-controls">
+          <button className="dark-toggle" onClick={() => setDarkMode((d) => !d)}>
+            {darkMode ? '🌙' : '☀️'}
           </button>
-        ))}
-      </div>
-      {mode === 'cloud' && !isAuthenticated ? (
-        <div style={{ textAlign: 'center', marginTop: 40, color: '#888' }}>
-          <h2>Please log in to use your Eisenhower Matrix</h2>
+          <button className="dark-toggle" onClick={handleModeSwitch}>
+            {mode === 'local' ? 'Cloud' : 'Local'}
+          </button>
+          {mode === 'cloud' && (isLoading ? null : isAuthenticated ? (
+            <>
+              <button className="dark-toggle" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
+                Logout
+              </button>
+              <span style={{ marginLeft: 8, fontWeight: 500, color: '#6366f1', fontSize: '0.97rem' }}>
+                {user.name || user.email}
+              </span>
+            </>
+          ) : (
+            <button className="dark-toggle" onClick={() => loginWithRedirect()}>
+              Login
+            </button>
+          ))}
         </div>
-      ) : (
-        <>
-          <TaskForm onAdd={addTask} />
-          <Matrix tasks={tasks} onDelete={deleteTask} />
-        </>
-      )}
+      </nav>
+      <div className="main-content">
+        {mode === 'cloud' && !isAuthenticated ? (
+          <div style={{ textAlign: 'center', marginTop: 40, color: '#888' }}>
+            <h2>Please log in to use your Eisenhower Matrix</h2>
+          </div>
+        ) : (
+          <>
+            <TaskForm onAdd={addTask} />
+            <Matrix tasks={tasks} onDelete={deleteTask} />
+          </>
+        )}
+      </div>
     </div>
   );
 }
