@@ -63,7 +63,11 @@ function App() {
       setTasks(prev => [...prev, { ...task, id: Date.now() }]);
     } else if (mode === 'cloud' && user) {
       axios.post('/api/tasks', { ...task, user: user.sub })
-        .then(res => setTasks(prev => [...prev, res.data]));
+        .then(res => setTasks(prev => [...prev, res.data]))
+        .catch(err => {
+          alert('Failed to add task. See console for details.');
+          console.error('Add task error:', err.response ? err.response.data : err);
+        });
     }
   };
 

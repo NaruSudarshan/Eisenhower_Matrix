@@ -17,6 +17,7 @@ function getQuadrant(task) {
 }
 
 export default function Matrix({ tasks, onDelete }) {
+  const useLocal = tasks.length > 0 && tasks[0].id && !tasks[0]._id;
   const quadrantTasks = {
     ui: [],
     uni: [],
@@ -34,7 +35,12 @@ export default function Matrix({ tasks, onDelete }) {
           <h2>{q.label}</h2>
           {quadrantTasks[q.key].length === 0 && <p className="empty">No tasks</p>}
           {quadrantTasks[q.key].map((task) => (
-            <Task key={task._id} task={task} onDelete={onDelete} />
+            <Task
+              key={useLocal ? task.id : task._id}
+              task={task}
+              onDelete={onDelete}
+              useLocal={useLocal}
+            />
           ))}
         </div>
       ))}
