@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #e0e7ff 0%, #f0f4f8 100%);
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+}
+
+button, input, textarea {
+  outline: none;
+  font-family: inherit;
+}
+
+.dark-mode body {
+  background: linear-gradient(135deg, #232946 0%, #181c2a 100%) !important;
+}
+
+.dark-mode input, .dark-mode textarea {
+  color: #e0e7ff;
+  background: #181c2a;
+}
+
+.dark-mode button {
+  color: #e0e7ff;
+} 
