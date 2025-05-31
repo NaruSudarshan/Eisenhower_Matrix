@@ -18,26 +18,34 @@ async function connectToDatabase() {
 }
 
 export default async function handler(req, res) {
-  const { db } = await connectToDatabase();
-  const collection = db.collection('tasks');
-
-  if (req.method === 'GET') {
-    const { user } = req.query;
-    if (!user) return res.status(401).json({ error: 'User required' });
-    const tasks = await collection.find({ user }).toArray();
-    res.status(200).json(tasks);
-  } else if (req.method === 'POST') {
-    const { title, description, urgent, important, user } = req.body;
-    if (!user) return res.status(401).json({ error: 'User required' });
-    const result = await collection.insertOne({ title, description, urgent, important, user });
-    res.status(201).json({ _id: result.insertedId, title, description, urgent, important, user });
-  } else if (req.method === 'DELETE') {
-    const { id, user } = req.query;
-    if (!user) return res.status(401).json({ error: 'User required' });
-    await collection.deleteOne({ _id: new ObjectId(id), user });
-    res.status(200).json({ success: true });
-  } else {
-    res.status(405).json({ error: 'Method not allowed' });
+  try {
+    const { db } = await connectToDatabase();
+    const collection = db.collection('tasks');
+    console.log('Request method:', req.method);
+    if (req.method === 'POST') {
+      console.log('POST body:', req.body);
+    }
+    if (req.method === 'GET') {
+      const { user } = req.query;
+      if (!user) return res.status(401).json({ error: 'User required' });
+      const tasks = await collection.find({ user }).toArray();
+      res.status(200).json(tasks);
+    } else if (req.method === 'POST') {
+      const { title, description, urgent, important, user } = req.body;
+      if (!user) return res.status(401).json({ error: 'User required' });
+      const result = await collection.insertOne({ title, description, urgent, important, user });
+      res.status(201).json({ _id: result.insertedId, title, description, urgent, important, user });
+    } else if (req.method === 'DELETE') {
+      const { id, user } = req.query;
+      if (!user) return res.status(401).json({ error: 'User required' });
+      await collection.deleteOne({ _id: new ObjectId(id), user });
+      res.status(200).json({ success: true });
+    } else {
+      res.status(405).json({ error: 'Method not allowed' });
+    }
+  } catch (err) {
+    console.error('API error:', err);
+    res.status(500).json({ error: { code: '500', message: 'A server error has occurred', details: err.message, stack: err.stack } });
   }
 }
 
