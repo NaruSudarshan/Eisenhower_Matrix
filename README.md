@@ -1,6 +1,6 @@
 # Eisenhower Matrix
 
-[![Try Now](https://img.shields.io/badge/Live%20Demo-Click%20Here-brightgreen?style=for-the-badge)](https://eisenhower-matrix-sudarshans-projects-5b642c6d.vercel.app/)
+[![Start Organizing](https://img.shields.io/badge/Start%20Organizing-Use%20Matrix-brightgreen?style=for-the-badge)](https://eisenhower-matrix-sudarshans-projects-5b642c6d.vercel.app/)
 
 A modern, minimalistic Eisenhower Matrix productivity app to help you organize and prioritize your tasks by urgency and importance.
 
